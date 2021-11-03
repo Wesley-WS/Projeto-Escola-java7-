@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	
+	<package name="default" extends="struts-default" namespace="/">
+		<action name="home" class="br.com.ebix.escola.action.HomeAction">
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="alunos">
+			<result type="redirect">/alunos/listar</result>
+		</action>
+		<action name="professores">
+			<result type="redirect">/professores/listar</result>
+		</action>
+		<action name="materias">
+			<result type="redirect">/materias/listar</result>
+		</action>
+		<action name="relatorios">
+			<result type="redirect">/relatorios/myJasperTest</result>
+		</action>
+	</package>
+	
+	<package name="alunos" extends="default" namespace="/alunos">
+		<action name="listar" class="br.com.ebix.escola.action.AlunosAction" method="listar">
+			<result name="success">listar.jsp</result>
+		</action>
+		
+		<action name="iniciarCadastro">
+			<result name="success">formularioCadastro.jsp</result>
+		</action>
+		<action name="cadastrar" class="br.com.ebix.escola.action.AlunosAction" method="cadastrar">
+			<result name="success" type="redirect">alunos</result>
+			<result name="input">formularioCadastro.jsp</result>
+		</action>
+		
+		<action name="iniciarAlteracao" class="br.com.ebix.escola.action.AlunosAction" method="detalhar">
+			<result name="success">formularioAlteracao.jsp</result>
+			<result name="error" type="redirect">alunos</result>
+		</action>
+		<action name="alterar" class="br.com.ebix.escola.action.AlunosAction" method="alterar">
+			<result name="success" type="redirect">alunos</result>
+			<result name="input">formularioAlteracao.jsp</result>
+		</action>
+		
+		<action name="iniciarAssociacao" class="br.com.ebix.escola.action.AlunosAction" method="listarMaterias">
+			<result name="success">formularioAssociacao.jsp</result>
+			<result name="error" type="redirect">alunos</result>
+		</action>
+		<action name="iniciarDesassociacao" class="br.com.ebix.escola.action.AlunosAction" method="listarMateriasAssociadas">
+			<result name="success">formularioDesassociacao.jsp</result>
+			<result name="error" type="redirect">alunos</result>
+		</action>
+		
+		<action name="associar" class="br.com.ebix.escola.action.AlunosAction" method="associar">
+			<result name="success" type="redirect">alunos</result>
+			<result name="error" type="redirect">alunos</result>
+		</action>
+		<action name="desassociar" class="br.com.ebix.escola.action.AlunosAction" method="desassociar">
+			<result name="success" type="redirect">alunos</result>
+			<result name="error" type="redirect">alunos</result>
+		</action>
+		
+		<action name="deletar" class="br.com.ebix.escola.action.AlunosAction" method="deletar">
+			<result name="success" type="redirect">alunos</result>
+			<result name="input">listar.jsp</result>
+		</action>
+		
+		<action name="detalhar" class="br.com.ebix.escola.action.AlunosAction" method="detalhar">
+			<result name="success">detalhar.jsp</result>
+			<result name="error" type="redirect">alunos</result>
+		</action>
+		
+		<action name="gerarExcel" class="br.com.ebix.escola.action.AlunosAction" method="gerarExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">excelStream</param>
+				<param name="contentDisposition">attachment;filename="listaAlunos.xls"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+			<result name="error" type="redirect">alunos</result>
+    	</action>
+	</package>
+	
+	<package name="relatorios" namespace="/relatorios" extends="jasperreports-default">
+		<action name="myJasperTest" class="br.com.ebix.escola.action.JasperAction" >
+			<result name="success" type="jasper">
+				<param name="location">/WEB-INF/jasper/codAluno.jasper</param>
+				<param name="dataSource">myList</param>
+				<param name="format">PDF</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="professores" extends="default" namespace="/professores">
+		<action name="listar" class="br.com.ebix.escola.action.ProfessoresAction" method="listar">
+			<result name="success">listar.jsp</result>
+		</action>
+		
+		<action name="iniciarAssociacao" class="br.com.ebix.escola.action.ProfessoresAction" method="listarMaterias">
+			<result name="success">formularioAssociacao.jsp</result>
+			<result name="error" type="redirect">professores</result>
+		</action>
+		<action name="iniciarDesassociacao" class="br.com.ebix.escola.action.ProfessoresAction" method="listarMateriasAssociadas">
+			<result name="success">formularioDesassociacao.jsp</result>
+		</action>
+		
+		<action name="associar" class="br.com.ebix.escola.action.ProfessoresAction" method="associar">
+			<result name="success" type="redirect">professores</result>
+			<result name="error" type="redirect">professores</result>
+		</action>
+		<action name="desassociar" class="br.com.ebix.escola.action.ProfessoresAction" method="desassociar">
+			<result name="success" type="redirect">professores</result>
+			<result name="error" type="redirect">professores</result>
+		</action>
+		
+		<action name="iniciarCadastro">
+			<result name="success">formularioCadastro.jsp</result>
+		</action>
+		<action name="cadastrar" class="br.com.ebix.escola.action.ProfessoresAction" method="cadastrar">
+			<result name="success" type="redirect">professores</result>
+			<result name="input">formularioCadastro.jsp</result>
+		</action>
+		
+		<action name="iniciarAlteracao" class="br.com.ebix.escola.action.ProfessoresAction" method="detalhar">
+			<result name="success">formularioAlteracao.jsp</result>
+			<result name="error" type="redirect">professores</result>
+		</action>
+		<action name="alterar" class="br.com.ebix.escola.action.ProfessoresAction" method="alterar">
+			<result name="success" type="redirect">professores</result>
+			<result name="input">formularioAlteracao.jsp</result>
+		</action>
+		
+		<action name="deletar" class="br.com.ebix.escola.action.ProfessoresAction" method="deletar">
+			<result name="success" type="redirect">professores</result>
+			<result name="input">listar.jsp</result>
+		</action>
+		<action name="detalhar" class="br.com.ebix.escola.action.ProfessoresAction" method="detalhar">
+			<result name="success">detalhar.jsp</result>
+			<result name="error" type="redirect">professores</result>
+			<!-- Pagina de erro ou redirecionamento? -->
+		</action>
+		
+		<action name="gerarExcel" class="br.com.ebix.escola.action.ProfessoresAction" method="gerarExcel">
+			<result  name="success"  type="stream">           
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">excelStream</param>
+				<param name="contentDisposition">attachment;filename="listaProfessores.xls"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+			<result name="error" type="redirect">professores</result>
+    	</action>
+	</package>
+	<package name="materias" extends="default" namespace="/materias">
+		<action name="listar" class="br.com.ebix.escola.action.MateriasAction" method="listar">
+			<result name="success">listar.jsp</result>
+		</action>
+		
+		<action name="iniciarCadastro" class="br.com.ebix.escola.action.MateriasAction">
+			<result name="success">formularioCadastro.jsp</result>
+		</action>
+		<action name="cadastrar" class="br.com.ebix.escola.action.MateriasAction" method="cadastrar">
+			<result name="success" type="redirect">listar</result>
+			<result name="input">formularioCadastro.jsp</result>
+		</action>
+		
+		<action name="iniciarAlteracao" class="br.com.ebix.escola.action.MateriasAction" method="detalhar">
+			<result name="success">formularioAlteracao.jsp</result>
+			<result name="error" type="redirect">materias</result>
+		</action>
+		<action name="alterar" class="br.com.ebix.escola.action.MateriasAction" method="alterar">
+			<result name="success" type="redirect">listar</result>
+			<result name="input">formularioAlteracao.jsp</result>
+		</action>
+		
+		<action name="deletar" class="br.com.ebix.escola.action.MateriasAction" method="deletar">
+			<result name="success" type="redirect">listar</result>
+			<result name="input">listar.jsp</result>
+			<!-- Pagina para erro de deleção? -->
+		</action>
+		<action name="detalhar" class="br.com.ebix.escola.action.MateriasAction" method="detalhar">
+			<result name="success">detalhar.jsp</result>
+			<result name="error" type="redirect">materias</result>
+			<!-- Pagina de erro ou redirecionamento? -->
+		</action>
+		
+		<action name="gerarExcel" class="br.com.ebix.escola.action.MateriasAction" method="gerarExcel">
+			<result name="success"  type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">excelStream</param>
+				<param name="contentDisposition">attachment;filename="listaMaterias.xls"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+			<result name="error" type="redirect">materias</result>
+    	</action>
+	</package>
+</struts>

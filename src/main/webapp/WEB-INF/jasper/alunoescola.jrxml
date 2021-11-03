@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AlunoEscola" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql Escola"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * 
+FROM escola.alunos]]>
+	</queryString>
+	<field name="cod_aluno">
+		<property name="com.jaspersoft.studio.field.name" value="cod_aluno"/>
+		<property name="com.jaspersoft.studio.field.label" value="cod_aluno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alunos"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="54" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Alunos da Escola]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="10" width="550" height="30" >
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="848c1718-7c41-4860-ba4d-03da559720a5"/>
+				</reportElement>
+				<text><![CDATA[cod_aluno]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="550" height="30" >
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="848c1718-7c41-4860-ba4d-03da559720a5"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cod_aluno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

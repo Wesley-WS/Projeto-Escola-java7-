@@ -1,0 +1,36 @@
+<div class="sidebar">
+    <div class="sidebar-content">
+        <div class="sidebar-extras-header">
+            <div class="sidebar-item sidebar-menu-item">
+                <div class="icon"><i class="fas fa-bars"></i></div>
+            </div>
+            <div class="sidebar-welcome sidebar-button">Bem vindo(a)</div>
+        </div>
+		
+        <div class="fit-flex-container">
+            <a href="/Escola/home" class="sidebar-item">
+                <div class="icon"><i class="fas fa-home"></i></div>
+                <div class="sidebar-button">Home</div>
+            </a>
+            <a href="/Escola/alunos/listar" class="sidebar-item">
+                <div class="icon"><i class="fas fa-user-graduate"></i></div>
+                <div class="sidebar-button">Lista de alunos</div>
+            </a>
+            <a href="/Escola/professores/listar" class="sidebar-item">
+                <div class="icon"><i class="fas fa-glasses"></i></div>
+                <div class="sidebar-button">Lista de professores</div>
+            </a>
+            <a href="/Escola/materias/listar" class="sidebar-item">
+                <div class="icon"><i class="fas fa-chalkboard"></i></div>
+                <div class="sidebar-button">Lista de materias</div>
+            </a>
+        </div>
+
+        <!-- <div class="sidebar-extras-footer">
+            <div id="close-app" class="sidebar-item">
+                <div class="icon"><i class="fas fa-walking"></i></div>
+                <div class="sidebar-button">SAIR</div>
+            </div>
+        </div> -->
+    </div>
+</div>
