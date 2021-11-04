@@ -7,12 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="${context}/assets/css/styles.css">
-<script src="https://kit.fontawesome.com/6697f5eca6.js"
-	crossorigin="anonymous"></script>
-<title>Home</title>
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="${context}/assets/css/styles.css">
+	<script src="https://kit.fontawesome.com/6697f5eca6.js"
+		crossorigin="anonymous"></script>
+	<title>Home</title>
 </head>
 <body>
 	<div class="app">

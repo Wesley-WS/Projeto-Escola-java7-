@@ -12,6 +12,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import br.com.ebix.escola.model.Aluno;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperReport;
 
 public class JasperAction extends ActionSupport{
 	private static final long serialVersionUID = 8704084135816754792L;
@@ -47,9 +49,10 @@ public class JasperAction extends ActionSupport{
         // Normally we would provide a pre-compiled .jrxml file
         // or check to make sure we don't compile on every request.*/
         try {
-        	JasperCompileManager.compileReportToFile(
-        			context.getRealPath("/WEB-INF/jasper/codAluno.jrxml"),
-        			context.getRealPath("/WEB-INF/jasper/codAluno.jasper"));
+        	JasperExportManager.exportReportToPdf(null);
+//        	JasperCompileManager.compileReportToFile(
+//        			context.getRealPath("/WEB-INF/jasper/codAluno.jrxml"),
+//        			context.getRealPath("/WEB-INF/jasper/codAluno.jasper"));
         } catch (Exception e) {
             e.printStackTrace();
             return ERROR;

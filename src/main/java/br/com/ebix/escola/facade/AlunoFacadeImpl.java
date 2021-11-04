@@ -21,7 +21,6 @@ import br.com.ebix.escola.utils.ValidaDataUtil;
 import br.com.ebix.escola.utils.ValidaEmail;
 import br.com.ebix.escola.utils.ValidaStringUtil;
 import br.com.ebix.escola.utils.ValidaTelefoneUtil;
-import net.sf.jasperreports.engine.util.BreakIteratorSplitCharacter;
 
 public class AlunoFacadeImpl implements AlunoFacade {
 
