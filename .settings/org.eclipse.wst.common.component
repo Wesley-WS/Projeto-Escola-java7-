@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Projeto-Escola-java7">
+        
+    <wb-module deploy-name="ProjetoEscola">
+                
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/teste"/>
-        <property name="context-root" value="Projeto-Escola-java7"/>
-        <property name="java-output-path" value="/Projeto-Escola-java7/build/classes"/>
+                
+        <property name="java-output-path" value="/ProjetoEscola/build/classes"/>
+        <property name="context-root" value="ProjetoEscola"/>
+            
     </wb-module>
+    
 </project-modules>
