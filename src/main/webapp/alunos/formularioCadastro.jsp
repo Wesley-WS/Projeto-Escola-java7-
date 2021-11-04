@@ -39,7 +39,7 @@
 						</div>
 						<div class="mb-8">
 							<label>Cpf</label><br />
-							<input id="CPF" type="text" name="aluno.cpf" value="${aluno.cpf}"/>
+							<input id="cpf" type="text" name="aluno.cpf" value="${aluno.cpf}"/>
 							<s:fielderror fieldName="cpf" />
 						</div>
 						<div class="mb-8">
