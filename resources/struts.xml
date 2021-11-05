@@ -84,15 +84,15 @@
 			</result>
 			<result name="error" type="redirect">alunos</result>
     	</action>
-	</package>
-	
-	<package name="relatorios" namespace="/relatorios" extends="jasperreports-default">
-		<action name="myJasperTest" class="br.com.ebix.escola.action.JasperAction" >
-			<result name="success" type="jasper">
-				<param name="location">/WEB-INF/jasper/codAluno.jasper</param>
-				<param name="dataSource">myList</param>
-				<param name="format">PDF</param>
+
+		<action name="gerarPdf" class="br.com.ebix.escola.action.AlunosAction" method="gerarPdf">
+			<result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="contentDisposition">attachment;filename="relatorioAlunos.pdf"</param>
+				<param name="bufferSize">4096</param>
 			</result>
+			<result name="error" type="redirect">alunos</result>
 		</action>
 	</package>
 	
@@ -154,7 +154,18 @@
 			</result>
 			<result name="error" type="redirect">professores</result>
     	</action>
+
+		<action name="gerarPdf" class="br.com.ebix.escola.action.ProfessoresAction" method="gerarPdf">
+			<result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="contentDisposition">attachment;filename="relatorioAlunos.pdf"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+			<result name="error" type="redirect">professores</result>
+		</action>
 	</package>
+	
 	<package name="materias" extends="default" namespace="/materias">
 		<action name="listar" class="br.com.ebix.escola.action.MateriasAction" method="listar">
 			<result name="success">listar.jsp</result>
@@ -197,5 +208,15 @@
 			</result>
 			<result name="error" type="redirect">materias</result>
     	</action>
+
+		<action name="gerarPdf" class="br.com.ebix.escola.action.MateriasAction" method="gerarPdf">
+			<result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="contentDisposition">attachment;filename="relatorioAlunos.pdf"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+			<result name="error" type="redirect">materias</result>
+		</action>
 	</package>
 </struts>

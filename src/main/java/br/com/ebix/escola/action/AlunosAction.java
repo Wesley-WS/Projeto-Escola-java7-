@@ -1,7 +1,12 @@
 package br.com.ebix.escola.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -30,6 +35,7 @@ public class AlunosAction extends ActionSupport {
 	private String[] materiasSelecionadas;
 	
 	private InputStream excelStream;
+	private ByteArrayInputStream pdfStream;
 	
 	public String listar() {
 		alunos = alunoFacade.getAll();
@@ -145,9 +151,19 @@ public class AlunosAction extends ActionSupport {
 	}
 	
 	public String gerarExcel() {
-		excelStream = alunoFacade.gerarRelatorioAlunos();
+		excelStream = alunoFacade.gerarRelatorioExcel();
 		
 		if(excelStream == null) {
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+	
+	public String gerarPdf() {
+		ServletContext context = ServletActionContext.getServletContext();
+		
+		pdfStream = alunoFacade.gerarRelatorioPdf(context.getRealPath("/WEB-INF/jasper/alunosRelatorio.jrxml"));
+		if(pdfStream == null) {
 			return ERROR;
 		}
 		return SUCCESS;
@@ -192,4 +208,13 @@ public class AlunosAction extends ActionSupport {
 	public void setExcelStream(InputStream excelStream) {
 		this.excelStream = excelStream;
 	}
+	
+	public ByteArrayInputStream getPdfStream() {
+		return pdfStream;
+	}
+
+	public void setPdfStream(ByteArrayInputStream pdfStream) {
+		this.pdfStream = pdfStream;
+	}
+
 }

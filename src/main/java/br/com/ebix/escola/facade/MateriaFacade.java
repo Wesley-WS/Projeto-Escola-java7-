@@ -1,5 +1,6 @@
 package br.com.ebix.escola.facade;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -13,5 +14,6 @@ public interface MateriaFacade {
 	List<AcoesValidacao> add(Materia materia);
 	List<AcoesValidacao> update(Materia materia);
 	AcoesValidacao delete(Materia materia);
-	InputStream gerarRelatorioMaterias();
+	InputStream gerarRelatorioExcel();
+	ByteArrayInputStream gerarRelatorioPdf(String path);
 }

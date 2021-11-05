@@ -5,7 +5,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -21,6 +23,12 @@ import br.com.ebix.escola.utils.ValidaDataUtil;
 import br.com.ebix.escola.utils.ValidaEmail;
 import br.com.ebix.escola.utils.ValidaStringUtil;
 import br.com.ebix.escola.utils.ValidaTelefoneUtil;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 
 public class ProfessorFacadeImpl implements ProfessorFacade {
@@ -90,7 +98,7 @@ public class ProfessorFacadeImpl implements ProfessorFacade {
 	}
 
 	@Override
-	public InputStream gerarRelatorioProfessores() {
+	public InputStream gerarRelatorioExcel() {
 		List<Professor> professores = professorDao.getAll();
 		
 		HSSFWorkbook workBook = new HSSFWorkbook();
@@ -123,6 +131,26 @@ public class ProfessorFacadeImpl implements ProfessorFacade {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return stream;
+	}
+	
+	@Override
+	public ByteArrayInputStream gerarRelatorioPdf(String path) {
+		List<Professor> professores = professorDao.getAll();
+		
+		ByteArrayInputStream stream = null;
+        try {
+        	Map<String, Object> map = new HashMap<String, Object>();
+
+        	JasperReport teste = JasperCompileManager.compileReport(path);
+        	JasperPrint print = JasperFillManager.fillReport(teste, map, new JRBeanCollectionDataSource(professores, false));
+        	
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			JasperExportManager.exportReportToPdfStream(print, baos);
+			stream = new ByteArrayInputStream(baos.toByteArray());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 		return stream;
 	}
 	

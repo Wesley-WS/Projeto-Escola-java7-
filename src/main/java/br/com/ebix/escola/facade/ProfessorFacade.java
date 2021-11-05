@@ -1,5 +1,6 @@
 package br.com.ebix.escola.facade;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 import br.com.ebix.escola.enums.AcoesValidacao;
@@ -11,5 +12,6 @@ public interface ProfessorFacade {
 	List<AcoesValidacao> add(Professor professor);
 	List<AcoesValidacao> update(Professor professor);
 	AcoesValidacao delete(Professor professor);
-	InputStream gerarRelatorioProfessores();
+	InputStream gerarRelatorioExcel();
+	ByteArrayInputStream gerarRelatorioPdf(String path);
 }

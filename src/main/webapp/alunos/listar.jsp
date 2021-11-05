@@ -33,7 +33,7 @@
 						<a href="iniciarCadastro" class="btn btn-primary"><i
 							class="fas fa-plus"></i> Inserir aluno</a>
 					</div>
-					<a href="baixarRelatorio" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Gerar relatório</a>
+					<a href="gerarPdf" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Gerar relatório</a>
 					<a href="visualizarRelatorio" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Visualizar relatório</a>
 					<a href="gerarExcel" class="btn btn-primary"><i class="fas fa-file-excel"></i> Gerar Excel</a>
 				</div>

@@ -4,7 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -16,6 +18,12 @@ import br.com.ebix.escola.dao.MateriaDaoImpl;
 import br.com.ebix.escola.enums.AcoesValidacao;
 import br.com.ebix.escola.model.Materia;
 import br.com.ebix.escola.utils.ValidaStringUtil;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class MateriaFacadeImpl implements MateriaFacade {
 	private MateriaDao materiaDao = new MateriaDaoImpl();
@@ -84,7 +92,7 @@ public class MateriaFacadeImpl implements MateriaFacade {
 	}
 
 	@Override
-	public InputStream gerarRelatorioMaterias() {
+	public InputStream gerarRelatorioExcel() {
 		List<Materia> materias = materiaDao.getAll();
 		
 		HSSFWorkbook workBook = new HSSFWorkbook();
@@ -115,6 +123,27 @@ public class MateriaFacadeImpl implements MateriaFacade {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return stream;
+	}
+	
+	@Override
+	public ByteArrayInputStream gerarRelatorioPdf(String path) {
+		List<Materia> materias = materiaDao.getAll();
+		
+		ByteArrayInputStream stream = null;
+        try {
+        	Map<String, Object> map = new HashMap<String, Object>();
+
+        	JasperReport teste = JasperCompileManager.compileReport(path);
+        	JasperPrint print = JasperFillManager.fillReport(teste, map, new JRBeanCollectionDataSource(materias, false));
+        	
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			JasperExportManager.exportReportToPdfStream(print, baos);
+			stream = new ByteArrayInputStream(baos.toByteArray());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 		return stream;
 	}
 

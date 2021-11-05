@@ -1,15 +1,12 @@
 package br.com.ebix.escola.action;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -27,6 +24,7 @@ public class MateriasAction extends ActionSupport {
 	private List<Materia> materias;
 
 	private InputStream excelStream;
+	private ByteArrayInputStream pdfStream;
 	
 	public String listar() {
 		materias = materiaFacade.getAll();
@@ -77,8 +75,18 @@ public class MateriasAction extends ActionSupport {
 	}
 	
 	public String gerarExcel() {
-		excelStream = materiaFacade.gerarRelatorioMaterias();
+		excelStream = materiaFacade.gerarRelatorioExcel();
 		if(excelStream == null) {
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+	
+	public String gerarPdf() {
+		ServletContext context = ServletActionContext.getServletContext();
+		
+		pdfStream = materiaFacade.gerarRelatorioPdf(context.getRealPath("/WEB-INF/jasper/alunosRelatorio.jrxml"));
+		if(pdfStream == null) {
 			return ERROR;
 		}
 		return SUCCESS;
@@ -106,6 +114,14 @@ public class MateriasAction extends ActionSupport {
 
 	public void setExcelStream(InputStream excelStream) {
 		this.excelStream = excelStream;
+	}
+
+	public ByteArrayInputStream getPdfStream() {
+		return pdfStream;
+	}
+
+	public void setPdfStream(ByteArrayInputStream pdfStream) {
+		this.pdfStream = pdfStream;
 	}
 	
 }
