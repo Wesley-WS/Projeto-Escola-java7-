@@ -29,7 +29,7 @@ public class AlunoMateriaDaoImpl  extends ConnectionFactory implements AlunoMate
 	@Override
 	public void desassociar(Aluno aluno, Materia materia) { //TODO: Revisar isso aqui
 		try {
-			String sql = "DELETE from escola.relalunomat WHERE cod_aluno=? and cod_materia=?;;";
+			String sql = "DELETE from escola.relalunomat WHERE cod_aluno=? and cod_materia=?";
 			
 			PreparedStatement ps = getConnection().prepareStatement(sql);
 			ps.setLong(1, aluno.getCod_aluno());
@@ -39,6 +39,31 @@ public class AlunoMateriaDaoImpl  extends ConnectionFactory implements AlunoMate
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public List<AlunoMateria> getAll(){ //TODO: Arrumar isso aqui, não sei se presta ;D
+		List<AlunoMateria> listaAlunoMateria = new ArrayList<AlunoMateria>();
+		
+		try {
+			String sql = "SELECT * FROM escola.relalunomat";
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				AlunoMateria alunoMateria = new AlunoMateria();
+				alunoMateria.setCod_aluno(rs.getLong("cod_aluno"));
+				alunoMateria.setCod_materia(rs.getLong("cod_materia"));
+				
+				listaAlunoMateria.add(alunoMateria);
+			}
+			
+			return listaAlunoMateria;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+			return listaAlunoMateria;
 		}
 	}
 	

@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="${context}/assets/css/styles.css">
 	<script src="https://kit.fontawesome.com/6697f5eca6.js"
 		crossorigin="anonymous"></script>
-	<title>Home</title>
+	<title>Escola - Home</title>
 </head>
 <body>
 	<div class="app">

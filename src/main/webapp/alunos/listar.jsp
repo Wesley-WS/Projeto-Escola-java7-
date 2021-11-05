@@ -20,7 +20,7 @@
 		crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../assets/js/modal.js"></script>
-	<title>Alunos</title>
+	<title>Escola - Listagem de alunos</title>
 </head>
 <body>
 	<div class="app">

@@ -10,6 +10,7 @@ import br.com.ebix.escola.model.Materia;
 import br.com.ebix.escola.model.Professor;
 
 public class ProfessorMateriaDaoImpl extends ConnectionFactory implements ProfessorMateriaDao {
+	
 	@Override
 	public List<Materia> getAllMateriasFromProfessor(Professor professor) {
 		List<Materia> materias = new ArrayList<Materia>();
@@ -62,6 +63,21 @@ public class ProfessorMateriaDaoImpl extends ConnectionFactory implements Profes
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return materiaObtida;
+		}
+	}
+
+	@Override
+	public void clearCodProfessorFromMateriaByCodProfessor(Professor professor) {
+		try {
+			String sql = "UPDATE escola.materias SET cod_professor=null WHERE cod_professor=?";
+			
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+			ps.setLong(1, professor.getCod_professor());
+			
+			ps.execute();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

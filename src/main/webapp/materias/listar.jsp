@@ -14,7 +14,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://kit.fontawesome.com/6697f5eca6.js" crossorigin="anonymous"></script>
 	<script src="../assets/js/modal.js"></script>
-	<title>Materias</title>
+	<title>Escola - Listagem de matérias</title>
 </head>
 <body>
 	<div class="app">

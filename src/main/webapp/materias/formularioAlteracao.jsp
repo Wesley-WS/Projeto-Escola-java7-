@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 	<script type="text/javascript" src="${context}/assets/js/app.js"></script>
 	
-	<title>Formulario - Atualizar matéria</title>
+	<title>Escola - Atualizar dados matéria</title>
 </head>
 <body>
 	<div class="app">

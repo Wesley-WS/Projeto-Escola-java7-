@@ -54,7 +54,8 @@ public class AlunosAction extends ActionSupport {
 	
 	public String listarMaterias() {
 		aluno = alunoFacade.get(aluno);
-		materias = alunoMateriaFacade.getAllMateriasByCodAluno(aluno);
+		materias = alunoMateriaFacade.getAllMaterias();
+		//materias = alunoMateriaFacade.getAllMateriasByCodAluno(aluno);
 		
 		if(materias != null) {
 			return SUCCESS;
@@ -98,17 +99,15 @@ public class AlunosAction extends ActionSupport {
 	}
 	
 	public String associar() {
-//		if(materiasSelecionadas != null) {
-//			for(String cod_materia : materiasSelecionadas) {
-//				Materia materia = new Materia();
-//				materia.setCod_materia(Long.parseLong(cod_materia));
-//				
-//				alunoMateriaFacade.associar(aluno, materia);
-//			}
-//		}
-		
 		try {
 			if(materiasSelecionadas != null) {
+				for(String cod_materia : materiasSelecionadas) {
+					Materia materia = new Materia();
+					materia.setCod_materia(Long.parseLong(cod_materia));
+					
+					alunoMateriaFacade.desassociar(aluno, materia);
+				}
+				
 				for(String cod_materia : materiasSelecionadas) {
 					Materia materia = new Materia();
 					materia.setCod_materia(Long.parseLong(cod_materia));
@@ -123,7 +122,7 @@ public class AlunosAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String desassociar() {
+	/*public String desassociar() {
 		try {
 			if(materiasSelecionadas != null) {
 				for(String cod_materia : materiasSelecionadas) {
@@ -138,7 +137,7 @@ public class AlunosAction extends ActionSupport {
 			return ERROR;
 		}
 		return SUCCESS;
-	}
+	}*/
 	
 	public String deletar() {
 		AcoesValidacao acao = alunoFacade.delete(aluno);

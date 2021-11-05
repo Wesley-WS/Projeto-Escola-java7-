@@ -47,6 +47,11 @@ public class ProfessorMateriaFacadeImpl implements ProfessorMateriaFacade {
 	}
 	
 	@Override
+	public List<Materia> getAll() {
+		return materiaFacade.getAll();
+	}
+	
+	@Override
 	public List<Materia> getAllMateriasFromProfessor(Professor professor) {
 		return professorMateriaDao.getAllMateriasFromProfessor(professor);
 	}
@@ -60,14 +65,17 @@ public class ProfessorMateriaFacadeImpl implements ProfessorMateriaFacade {
 		return ValidaStringUtil.eNuloVazioOuHaApenasEspaco(professor.getCod_professor());
 	}
 
-	@Override
-	public void desassociateMateria(Materia materia) {
-		if(materia.getCod_materia()!=null) {
+	@Override //clearCodProfessorFromMateriaByCodProfessor(professor);
+	public void disassociateProfessorFromMateriaByCodProfessor(Professor professor) {
+		if(!codigoEInvalido(professor)) {
+			professorMateriaDao.clearCodProfessorFromMateriaByCodProfessor(professor);
+		}
+		/*if(materia.getCod_materia()!=null) {
 			materia = materiaFacade.get(materia);
 			materia.setCod_professor(null);
 			materiaFacade.update(materia);
 			
-		}
+		}*/
 		
 	}
 

@@ -15,7 +15,7 @@
 		href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
 		integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
 		crossorigin="anonymous">
-	<title>Detalhar Professor</title>
+	<title>Escola - Detalhar dados professor</title>
 </head>
 <body>
 	<div class="app">

@@ -24,6 +24,7 @@ public class MateriaDaoImpl extends ConnectionFactory implements MateriaDao {
 			while(rs.next()) {
 				materiaObtida = new Materia();
 				materiaObtida.setCod_materia(rs.getLong("cod_materia"));
+				materiaObtida.setCod_professor(rs.getLong("cod_professor"));
 				materiaObtida.setNome(rs.getString("nome"));
 				materiaObtida.setSigla(rs.getString("sigla"));
 			}
@@ -50,6 +51,7 @@ public class MateriaDaoImpl extends ConnectionFactory implements MateriaDao {
 			while(rs.next()) {
 				Materia materia = new Materia();
 				materia.setCod_materia(rs.getLong("cod_materia"));
+				materia.setCod_professor(rs.getLong("cod_professor"));
 				materia.setNome(rs.getString("nome"));
 				materia.setSigla(rs.getString("sigla"));
 				

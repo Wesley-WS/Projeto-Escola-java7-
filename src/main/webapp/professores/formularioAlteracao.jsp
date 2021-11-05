@@ -20,7 +20,7 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 	<script type="text/javascript" src="${context}/assets/js/app.js"></script>
-	<title>Formulario - Atualizar professor</title>
+	<title>Escola - Atualizar dados professor</title>
 </head>
 <body>
 	<div class="app">

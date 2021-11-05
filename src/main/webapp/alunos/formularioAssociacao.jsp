@@ -18,7 +18,7 @@
 		crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
-	<title>Associar aluno a matéria</title>
+	<title>Escola - Associar aluno a uma matéria</title>
 </head>
 <body>
 	<div class="app">
@@ -35,6 +35,7 @@
 						
 						<s:iterator value="materias">
 							<s:hidden value="cod_materia"/>
+							Aqui ${ cod_aluno }
 							<s:checkbox name="materiasSelecionadas" id="%{cod_materia}" fieldValue="%{cod_materia}" label="%{nome}"></s:checkbox>
 						</s:iterator>
 						

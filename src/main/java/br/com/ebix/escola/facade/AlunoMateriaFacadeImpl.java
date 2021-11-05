@@ -79,6 +79,10 @@ public class AlunoMateriaFacadeImpl implements AlunoMateriaFacade{
 		}
 	}
 	
+	public List<Materia> getAllMaterias(){
+		return materiaFacade.getAll();
+	}
+	
 	public boolean codigoEInvalidoAlunoMateria(Aluno aluno, Materia materia) {
 		return (ValidaStringUtil.eNuloVazioOuHaApenasEspaco(aluno.getCod_aluno()) || ValidaStringUtil.eNuloVazioOuHaApenasEspaco(materia.getCod_materia()));
 	}

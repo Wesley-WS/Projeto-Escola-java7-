@@ -19,7 +19,7 @@
 		crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
-	<title>Associação aqui.</title>
+	<title>Escola - Associar professor a uma matéria</title>
 </head>
 <body>
 	<div class="app">
@@ -27,7 +27,7 @@
 	
 		<div class="body-wrapper">
 			<div class="body-header mb-8">
-				<h2>Associar um professor</h2>
+				<h2>Associar professor a uma matéria</h2>
 				<p>Professor: ${ professor.nome }</p>
 			</div>
 			<div class="body">
@@ -37,7 +37,13 @@
 						
 						<s:iterator value="materias">
 							<s:hidden value="cod_materia"/>
-							<s:checkbox name="materiasSelecionadas" id="%{cod_materia}" fieldValue="%{cod_materia}" label="%{nome}"></s:checkbox>
+							
+							<s:if test="cod_professor == professor.cod_professor">
+								<s:checkbox name="materiasSelecionadas" id="%{cod_materia}" fieldValue="%{cod_materia}" label="%{nome}" value="true"></s:checkbox>
+							</s:if>
+							<s:else>
+								<s:checkbox name="materiasSelecionadas" id="%{cod_materia}" fieldValue="%{cod_materia}" label="%{nome}" value="false"></s:checkbox>
+							</s:else>
 						</s:iterator>
 						<s:submit value="submit" name="submit" />
 					</s:form>

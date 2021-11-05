@@ -47,7 +47,7 @@ public class ProfessoresAction extends ActionSupport {
 
 	public String listarMaterias() {
 		professor = professorFacade.get(professor);
-		materias = professorMateriaFacade.getAllAvaiable();
+		materias = professorMateriaFacade.getAll();
 		if(professor != null && materias != null) {
 			return SUCCESS;
 		}else {
@@ -71,6 +71,8 @@ public class ProfessoresAction extends ActionSupport {
 	}
 
 	public String associar() {
+		professorMateriaFacade.disassociateProfessorFromMateriaByCodProfessor(professor);
+		
 		try {
 			if(materiasSelecionadas != null) {
 				for (String cod_materia : materiasSelecionadas) {
@@ -87,7 +89,7 @@ public class ProfessoresAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String desassociar() {
+	/*public String desassociar() {
 		try {
 			if(materiasSelecionadas != null) {
 				for (String cod_materia : materiasSelecionadas) {
@@ -102,7 +104,7 @@ public class ProfessoresAction extends ActionSupport {
 			return ERROR;
 		}
 		return SUCCESS;
-	}
+	}*/
 
 	public String cadastrar() {
 		List<AcoesValidacao> acoes = professorFacade.add(professor);
