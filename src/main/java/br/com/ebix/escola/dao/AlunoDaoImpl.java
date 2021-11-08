@@ -14,6 +14,28 @@ import br.com.ebix.escola.model.Professor;
 import br.com.ebix.escola.utils.ConverteDataUtil;
 
 public class AlunoDaoImpl extends ConnectionFactory implements AlunoDao {
+	
+	@Override
+	public List<Long> getAllCodMatByCod(Aluno aluno){
+		List<Long> cod_materias = new ArrayList<Long>();
+		try {
+			String sql = "SELECT * FROM escola.relalunomat WHERE cod_aluno=?";
+			
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+			ps.setLong(1, aluno.getCod_aluno());
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cod_materias.add(rs.getLong("cod_materia"));
+			}
+			return cod_materias;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+			return cod_materias;
+		}
+	}
+	
 	@Override
 	public Aluno get(Aluno aluno) {
 		Aluno alunoObtido = null;
@@ -51,10 +73,10 @@ public class AlunoDaoImpl extends ConnectionFactory implements AlunoDao {
 	@Override
 	public List<Aluno> getAll() {
 		List<Aluno> alunos = new ArrayList<Aluno>();
-		try(Connection conn = getConnection()) {
+		try {
 			String sql = "SELECT * FROM escola.alunos ";
 			
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = getConnection().prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
@@ -74,7 +96,6 @@ public class AlunoDaoImpl extends ConnectionFactory implements AlunoDao {
 			
 			rs.close();
 			ps.close();
-			conn.close();
 			return alunos;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -83,27 +104,34 @@ public class AlunoDaoImpl extends ConnectionFactory implements AlunoDao {
 	}
 	
 	@Override
-	public List<Long> getAllCodMatByCod(Aluno aluno){
-		List<Long> cod_materias = new ArrayList<Long>();
+	public List<Materia> getMateriasByCodAluno(Aluno aluno) {
+		List<Materia> materias = new ArrayList<Materia>();
+		
 		try {
-			String sql = "SELECT * FROM escola.relalunomat WHERE cod_aluno=?";
+			String sql = "SELECT m.* FROM escola.alunos a, escola.relalunomat am, escola.materias m WHERE a.cod_aluno = ? AND a.cod_aluno = am.cod_aluno AND m.cod_materia = am.cod_materia";
 			
 			PreparedStatement ps = getConnection().prepareStatement(sql);
 			ps.setLong(1, aluno.getCod_aluno());
-			ResultSet rs = ps.executeQuery();
 			
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				cod_materias.add(rs.getLong("cod_materia"));
+				Materia materia = new Materia();
+				materia.setCod_materia(rs.getLong("cod_materia"));
+				materia.setCod_professor(rs.getLong("cod_professor"));
+				materia.setNome(rs.getString("nome"));
+				materia.setSigla(rs.getString("sigla"));
+				materias.add(materia);
 			}
-			return cod_materias;
+			
+			rs.close();
+			ps.close();
+			return materias;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
-			return cod_materias;
+			return materias;
 		}
+		
 	}
-	
-	
 
 	@Override
 	public void add(Aluno aluno) {

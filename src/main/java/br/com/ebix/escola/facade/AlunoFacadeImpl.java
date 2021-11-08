@@ -33,32 +33,12 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class AlunoFacadeImpl implements AlunoFacade {
-
+	
 	// @Autowired
 	// private AlunoDao alunoDao;
 	private MateriaFacade materiaFacade = new MateriaFacadeImpl();
 	private AlunoDao alunoDao = new AlunoDaoImpl();
 
-	@Override
-	public Aluno get(Aluno aluno) {
-		if(codigoEstaInvalido(aluno)) {
-			return null;
-		} else {
-			Aluno alunoObtido = alunoDao.get(aluno);
-			
-			if(alunoObtido != null) {
-				return alunoObtido;
-			} else {
-				return null;
-			}
-		}
-	}
-
-	@Override
-	public List<Aluno> getAll() {
-		return alunoDao.getAll();
-	}
-	
 	public List<Materia> getAllMateriasByCodAluno(Aluno aluno){
 		List<Long> cod_materias = alunoDao.getAllCodMatByCod(aluno);
 		List<Materia> materiasAll = new ArrayList<Materia>();
@@ -99,6 +79,35 @@ public class AlunoFacadeImpl implements AlunoFacade {
 			return materiasAssociadas;
 		}
 		
+	}
+	
+	@Override
+	public Aluno get(Aluno aluno) {
+		if(codigoEstaInvalido(aluno)) {
+			return null;
+		} else {
+			Aluno alunoObtido = alunoDao.get(aluno);
+			
+			if(alunoObtido != null) {
+				return alunoObtido;
+			} else {
+				return null;
+			}
+		}
+	}
+
+	@Override
+	public List<Aluno> getAll() {
+		return alunoDao.getAll();
+	}
+	
+	@Override
+	public List<Materia> getMateriasByCodAluno(Aluno aluno) {
+		List<Materia> materias = new ArrayList<Materia>();
+		if(!codigoEstaInvalido(aluno)) {
+			materias = alunoDao.getMateriasByCodAluno(aluno);
+		}
+		return materias;
 	}
 
 	@Override

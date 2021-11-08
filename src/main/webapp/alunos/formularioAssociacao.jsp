@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 
@@ -33,10 +34,15 @@
 					<s:form action="associar" method="post">
 						<s:hidden name="aluno.cod_aluno" value="%{aluno.cod_aluno}" />
 						
-						<s:iterator value="materias">
+						<s:iterator value="alunoMaterias">
 							<s:hidden value="cod_materia"/>
-							Aqui ${ cod_aluno }
-							<s:checkbox name="materiasSelecionadas" id="%{cod_materia}" fieldValue="%{cod_materia}" label="%{nome}"></s:checkbox>
+							
+							<s:if test="%{cod_aluno != aluno.cod_aluno}">
+								<s:checkbox name="materiasSelecionadas" id="%{cod_materia}" fieldValue="%{cod_materia}" label="%{nome}" value="false"></s:checkbox>
+							</s:if>
+							<s:else>
+								<s:checkbox name="materiasSelecionadas" id="%{cod_materia}" fieldValue="%{cod_materia}" label="%{nome}" value="true"></s:checkbox>
+							</s:else>
 						</s:iterator>
 						
 						<s:submit value="Submit" name="submit"/>

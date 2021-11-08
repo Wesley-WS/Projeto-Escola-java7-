@@ -51,16 +51,8 @@
 			<result name="success">formularioAssociacao.jsp</result>
 			<result name="error" type="redirect">alunos</result>
 		</action>
-		<action name="iniciarDesassociacao" class="br.com.ebix.escola.action.AlunosAction" method="listarMateriasAssociadas">
-			<result name="success">formularioDesassociacao.jsp</result>
-			<result name="error" type="redirect">alunos</result>
-		</action>
 		
 		<action name="associar" class="br.com.ebix.escola.action.AlunosAction" method="associar">
-			<result name="success" type="redirect">alunos</result>
-			<result name="error" type="redirect">alunos</result>
-		</action>
-		<action name="desassociar" class="br.com.ebix.escola.action.AlunosAction" method="desassociar">
 			<result name="success" type="redirect">alunos</result>
 			<result name="error" type="redirect">alunos</result>
 		</action>
@@ -105,15 +97,8 @@
 			<result name="success">formularioAssociacao.jsp</result>
 			<result name="error" type="redirect">professores</result>
 		</action>
-		<action name="iniciarDesassociacao" class="br.com.ebix.escola.action.ProfessoresAction" method="listarMateriasAssociadas">
-			<result name="success">formularioDesassociacao.jsp</result>
-		</action>
 		
 		<action name="associar" class="br.com.ebix.escola.action.ProfessoresAction" method="associar">
-			<result name="success" type="redirect">professores</result>
-			<result name="error" type="redirect">professores</result>
-		</action>
-		<action name="desassociar" class="br.com.ebix.escola.action.ProfessoresAction" method="desassociar">
 			<result name="success" type="redirect">professores</result>
 			<result name="error" type="redirect">professores</result>
 		</action>

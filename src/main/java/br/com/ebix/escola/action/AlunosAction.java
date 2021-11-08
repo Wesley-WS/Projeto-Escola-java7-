@@ -16,6 +16,7 @@ import br.com.ebix.escola.facade.AlunoFacadeImpl;
 import br.com.ebix.escola.facade.AlunoMateriaFacade;
 import br.com.ebix.escola.facade.AlunoMateriaFacadeImpl;
 import br.com.ebix.escola.model.Aluno;
+import br.com.ebix.escola.model.AlunoMateria;
 import br.com.ebix.escola.model.Materia;
 
 
@@ -30,9 +31,11 @@ public class AlunosAction extends ActionSupport {
 	private Aluno aluno = new Aluno();
 	
 	private List<Materia> materias;
+	private List<AlunoMateria> alunoMaterias;
 	private List<Aluno> alunos;
 
 	private String[] materiasSelecionadas;
+	private List<Materia> materiasAssociadas;
 	
 	private InputStream excelStream;
 	private ByteArrayInputStream pdfStream;
@@ -44,20 +47,28 @@ public class AlunosAction extends ActionSupport {
 	
 	public String detalhar() {
 		aluno = alunoFacade.get(aluno);
+		materias = alunoFacade.getMateriasByCodAluno(aluno);
+		
+		return SUCCESS;
+		
+		/*aluno = alunoFacade.get(aluno);
 		if(aluno != null) {
 			materias = alunoMateriaFacade.getAllMateriasByCodAlunoHaving(aluno);
 			return SUCCESS;
 		} else {
 			return ERROR;
-		}
+		}*/
 	}
 	
 	public String listarMaterias() {
 		aluno = alunoFacade.get(aluno);
-		materias = alunoMateriaFacade.getAllMaterias();
-		//materias = alunoMateriaFacade.getAllMateriasByCodAluno(aluno);
 		
-		if(materias != null) {
+		alunoMaterias = alunoMateriaFacade.getAllMaterias(aluno);
+		// alunoMaterias = alunoMateriaFacade.getAllMaterias();
+		
+		// System.out.println(alunoMaterias.toString());
+		
+		if(alunoMaterias != null) {
 			return SUCCESS;
 		}else {
 			return ERROR;
@@ -65,13 +76,15 @@ public class AlunosAction extends ActionSupport {
 	}
 	
 	public String listarMateriasAssociadas() {
-		aluno = alunoFacade.get(aluno);
-		materias = alunoMateriaFacade.getAllMateriasByCodAlunoHaving(aluno);
+		// aluno = alunoFacade.get(aluno);
+
+		/*materias = alunoMateriaFacade.getAllMateriasByCodAlunoHaving(aluno);
 		if(materias != null) {
 			return SUCCESS;
 		}else {
 			return ERROR;
-		}
+		}*/
+		return SUCCESS;
 	}
 	
 	public String cadastrar() {
@@ -100,16 +113,12 @@ public class AlunosAction extends ActionSupport {
 	
 	public String associar() {
 		try {
+			alunoMateriaFacade.desassociar(aluno);
+			
 			if(materiasSelecionadas != null) {
 				for(String cod_materia : materiasSelecionadas) {
 					Materia materia = new Materia();
-					materia.setCod_materia(Long.parseLong(cod_materia));
 					
-					alunoMateriaFacade.desassociar(aluno, materia);
-				}
-				
-				for(String cod_materia : materiasSelecionadas) {
-					Materia materia = new Materia();
 					materia.setCod_materia(Long.parseLong(cod_materia));
 					
 					alunoMateriaFacade.associar(aluno, materia);
@@ -121,23 +130,6 @@ public class AlunosAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	/*public String desassociar() {
-		try {
-			if(materiasSelecionadas != null) {
-				for(String cod_materia : materiasSelecionadas) {
-					Materia materia = new Materia();
-					materia.setCod_materia(Long.parseLong(cod_materia));
-					
-					alunoMateriaFacade.desassociar(aluno, materia);
-				}
-			}
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			return ERROR;
-		}
-		return SUCCESS;
-	}*/
 	
 	public String deletar() {
 		AcoesValidacao acao = alunoFacade.delete(aluno);
@@ -187,6 +179,14 @@ public class AlunosAction extends ActionSupport {
 	public void setMaterias(List<Materia> materias) {
 		this.materias = materias;
 	}
+	
+	public List<AlunoMateria> getAlunoMaterias() {
+		return alunoMaterias;
+	}
+
+	public void setAlunoMaterias(List<AlunoMateria> alunoMaterias) {
+		this.alunoMaterias = alunoMaterias;
+	}
 
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
@@ -214,6 +214,14 @@ public class AlunosAction extends ActionSupport {
 
 	public void setPdfStream(ByteArrayInputStream pdfStream) {
 		this.pdfStream = pdfStream;
+	}
+
+	public List<Materia> getMateriasAssociadas() {
+		return materiasAssociadas;
+	}
+
+	public void setMateriasAssociadas(List<Materia> materiasAssociadas) {
+		this.materiasAssociadas = materiasAssociadas;
 	}
 
 }
